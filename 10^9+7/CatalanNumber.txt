@@ -1,0 +1,29 @@
+int mod= 1000000007;
+#define ll long long
+#define N 100000000
+
+ll f[N+1]; 
+
+ll set_factorial()
+{f[0] = 1; 
+ for(int i=1;i<=N;i++)
+    f[i]= (f[i-1]*i)%mod;
+}
+  
+ll pow(ll a, ll b) 
+{ll x=1,y=a;  
+ while(b > 0) 
+ 	{if(b%2 == 1) x=(x*y)%mod; 
+     y = (y*y)%mod; 
+ 	 b/=2; 
+ 	} 
+ return x; 
+} 
+
+ll InverseEuler(ll n) 
+{return pow(n,mod-2); 
+} 
+
+ll CatalanNumber(int n)
+{return (f[2*n]*((InverseEuler(f[n+1])*InverseEuler(f[n]))%mod))%mod;
+}

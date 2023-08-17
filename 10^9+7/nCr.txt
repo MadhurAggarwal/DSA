@@ -1,0 +1,45 @@
+int mod= 1000000007;
+#define ll long long
+#define N 100000000
+
+/*here N is the largest factorial we would need, check based on the constraints of the testcase*/
+/*f[i] is an array that stores value of (i!)%mod */
+
+
+ll f[N+1]; 
+
+ll set_factorial()
+{f[0] = 1; 
+ for(int i=1;i<=N;i++)
+    f[i]= (f[i-1]*i)%mod;
+}
+  
+ll pow(ll a, ll b) 
+{ll x=1,y=a;  
+ while(b > 0) 
+ 	{if(b%2 == 1) x=(x*y)%mod; 
+     y = (y*y)%mod; 
+ 	 b/=2; 
+ 	} 
+ return x; 
+} 
+
+ll InverseEuler(ll n) 
+{return pow(n,mod-2); 
+} 
+
+ll nCr(int n,int r)
+{return (f[n]*((InverseEuler(f[r])*InverseEuler(f[n-r]))%mod))%mod;
+}
+
+
+/*first call the set factorial function, then call the nCr function*/
+/*according to Euler formula 
+	a ^ ( phi m) = 1 (mod m). 
+ and, if m is prime phi m = m-1 . 
+ so a^-1 = a ^ (m - 2) (mod m).
+ where ^-1 means modular inverse .
+ to calculate nCr we need n!%mod, r!^-1 and (n-r)!^-1
+ and by euler formula we can replace ^-1 with ^(m-2)
+ so here, ncr%p = (n!*r!^-1 * (n -r)!^-1)%p = ((n! % p) * (r! ^-1 % p)*((n-r)! ^ -1 % p))%p.
+*/

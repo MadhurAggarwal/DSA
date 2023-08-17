@@ -1,0 +1,16 @@
+int mod= 1000000007;
+#define ll long long
+
+
+ll pow(ll a, ll b) 
+{ll x=1,y=a;  
+ while(b > 0) 
+ 	{if(b%2 == 1) x=(x*y)%mod; 
+       y = (y*y)%mod; 
+ 	 b/=2; 
+ 	} 
+ return x; 
+} 
+
+
+/*returns a^b %mod efficiently, takes O(logb) time complexity*/
